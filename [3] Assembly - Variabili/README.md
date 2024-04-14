@@ -22,6 +22,7 @@ Quando dichiariamo una variabile in assembly dobbiamo specificare il quantitativ
 | `DD` | Definisce lo spazio per un double word | $4 bytes$ |
 | `DQ` | Definisce lo spazio per un quad word | $8 bytes$ |
 | `DT` | Definisce lo spazio per un ten bytes | $10 bytes$ |
+| `EQU` | Definisce una costante  |  |
 
 Sulle variabili in questione ci sono alcune considerazioni da fare:
 
