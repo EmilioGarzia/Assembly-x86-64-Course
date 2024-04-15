@@ -41,6 +41,28 @@ poi ci sono altri $8$ registri GPR, anch'esso a `64bit`:
 
 Utilizziamo i registri GPR per memorizzare i valori delle variabili o dei valori temporanei, mentre quelli speciali si utilizzano prettamente per le loro specifiche funzioni.
 
+## Approfondimenti: riconoscere i registri
+
+A prima vista i nomi dei registri possono sembrare anonimi e privi di significato ma in realtà dicono molto sulla natura del registro, comprendere i nomi ci aiuta anche a memorizzarli meglio e ad avere una padronanza maggiore sul come impiegarli.
+
+In particolare i singoli registri sono impiegati per scopi specifici, di seguito una breve descrizione su ognuno di essi:
+
+1. **Accumulator Register** `AX` &rarr; Utilizzato nelle operazioni aritmetiche
+1. **Base Register** `BX` &rarr; Utilizzato come puntatore ai dati
+1. **Counter Register** `CX` &rarr; Utilizzato con le operazioni di shifting e nei loop
+1. **Stack pointer Register** `SP` &rarr; Puntatore alla testa dello stack, ovvero alla prossima istruzione del programma da eseguire
+1. **Stack Base pointer Register** `BP` &rarr; Utilizzato come puntatore alla base dello stack
+1. **Destination index register** `DI` &rarr; Utilizzato come puntatore alla destinazione nelle operazioni di stream
+1. **Source index register** `SI` &rarr; Utilizzato come puntatore alla sorgente nelle operazioni di stream
+1. **Data register** `DX` &rarr; Utilizzato nelle operazioni aritmetiche e nelle operazioni I/O
+
+Per quanto riguarda le nomenclautre, è possibile individuarli in base alla porzione di registro a cui vogliamo accedere:
+
+* `R`: Quando vogliamo accedere a tutti e `64bit` del registro anteponiamo la `R`, per esempio `RAX` per i $64bit$ del registro `AX`
+* `E`: Quando vogliamo accedere ai `32bit` del registro anteponiamo la `E` che sta per *extended*, per esempio `EAX` per i $32bit$ del registro `AX`
+* `default` : Di default i registri sono considerati di `16bit`, quindi, per esempio il registro `AX`, bha una dimensione di `16bit`
+* `H`, `L`: I registri che terminano con `H` o `L` sono di dimensioni di `8bit`ciascuno  e corrispondono rispettivamente alla parte più significativa *(high)* e alla parte meno significativa *(low)* del registro
+
 # Registro `EFLAGS`
 
 Il registro dei flag è un particolare registro nella quale specifici bit dei $64$ che lo compongono contengono informazioni di stato circa le operazioni che vengono svolte durante l'esecuzione del programma, per esempio, vi è un bit nel registro chiamato `ZF` *(Zero flag)* che viene settato a `1` se eseguiamo una divisione per zero, come vedremo ci sono molti bit che mostrano svariati flag.
