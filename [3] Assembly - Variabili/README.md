@@ -31,6 +31,7 @@ Sulle variabili in questione ci sono alcune considerazioni da fare:
 * Il processore utilizza un criterio *little endian*
 * I numeri negativi sono rappresentati con il sistema numerico **complemento a 2**
 * I valori floating point sono rappresentati in memoria con il sistema numerico `IEEE-754`
+* In assembly non parliamo prettamente di variabili, ma di **label**, infatti quello che facciamo noi è fissare delle etichette a delle specifiche aree di memoria che contengono le nostre informazioni
 
 # Dichiarazione di variabili non inizializzate
 
