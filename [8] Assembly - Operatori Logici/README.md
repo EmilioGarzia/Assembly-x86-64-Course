@@ -28,7 +28,7 @@ Di seguito alcune informazioni aggiuntive sul funzionamento del codice che contr
 
 * Molto banalmente nel programma viene eseguita un operazione di `AND` bit-a-bit con il nostro valore ed il valore immediato `1`, questo perchè se il nostro valore iniziale è pari, allora, il risultato dell'AND con il valore uno sarà pari, altrimenti, sarà dispari
     * Quando un operazione ritorna come valore un valore pari, allora, il campo `PF` *(parity flag)* del registro `EFLAGS` viene settato a `1`, altrimenti rimane a `0`
-* A questo punto abbiamo utilizzato un concetto che vedremo nella prossima lezione, ovvero il concetto di salti condizionati ed incondizionati, al momento ci basti sapere che con l'istruzione `jz` si controlla il campo `PF` e se questo è settato a `1`, allora salta alla parte di codice la cui label è pari a `even`, altrimenti continua normalmente a scorrere le istruzioni successive
+* A questo punto abbiamo utilizzato un concetto che vedremo nella prossima lezione, ovvero il concetto di salti condizionati ed incondizionati, al momento ci basti sapere che con l'istruzione `JP` si controlla il campo `PF` e se questo è settato a `1`, allora salta alla parte di codice la cui label è pari a `even`, altrimenti continua normalmente a scorrere le istruzioni successive
     * Nel codice è stato implementato anche un salto incondizionato `JMP`, questo perchè se siamo nello scenario dispari, alla fine dobbiamo saltare incondizionatamente alla fine del programma, se non usassimo questo salto, subito dopo la porzione di codice che tratta la disparità verrebbe eseguita anche la pparte di codice delle parità
 * E' possibile tenere d'occhio i bit del registro `EFLAGS` tramite il debugger `GDB` che vedremo verso le ultime lezioni
 

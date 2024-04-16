@@ -3,7 +3,7 @@
 ; @desc maggiori informazioni nel README.md
 
 section .data
-    value db 6                      ; valore da controllare
+    value db 7                      ; valore da controllare
     evenMSG db " e' PARI",0xa       ; messaggio da stampare se pari
     evenMSGLen equ $-evenMSG        ; lunghezza stringa evenMSG
     oddMSG db " e' DISPARI", 0xa    ; messaggio da stampare se dispari
@@ -27,7 +27,7 @@ value_output:                       ; mando in output il valore da controllare
     mov rdx, 1
     syscall
 
-    jz even                         ; se il campo PF di EFLAGS è settato a 1, salta direttamente alla label even, altrimenti continua proceduralmente
+    jp even                         ; se il campo PF di EFLAGS è settato a 1, salta direttamente alla label even, altrimenti continua proceduralmente
 
 odd:                                ; stampa il messaggio di disparità
     mov rax, 1
