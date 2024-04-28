@@ -1,79 +1,35 @@
-# Assembly Course: Costrutti di selezione
+# Assembly Course: Costrutto di iterazione
 
 - [Assembly Course: Costrutti di selezione](#assembly-course-costrutti-di-selezione)
-- [Salti incondizionati e salti condizionati](#salti-incondizionati-e-salti-condizionati)
-- [L'istruzione "compare" `CMP`](#listruzione-compare-cmp)
-- [Salti incondizionati `JMP`](#salti-incondizionati-jmp)
-- [Salti condizionati](#salti-condizionati)
+- [Iterazione con salti](#iterazione-con-salti)
+- [Iterazione con opcode `loop`](#iterazione-con-opcode-loop)
 - [Compilare ed eseguire un sorgente `*.asm`](#compilare-ed-eseguire-un-sorgente-asm)
 - [References](#references)
 - [Author](#author)
 
-# Salti incondizionati e salti condizionati
+# Iterazione con salti
 
-In assembly i costrutti di selezione hanno una struttura differente rispetto a come siamo abituati ai linguaggio più ad alto livello come il `C`, quando implementiamo un costrutto di selezione nei nostri sorgenti quello che stiamo facendo è "saltare" da un punto del codice ad un altro e questo salto può avvenire secondo due possibili scenari:
-
-* **Salti incondizionati** &rarr; Sono salti che vengono eseguiti a prescindere, senza alcun tipo di condizione, è possibile saltare da una parte del codice all'altra con l'operatore `JMP` che come unico operando ammette la label del blocco di codice a cui si vuole saltare
-* **Salti condizionati** &rarr; Questo genere di salti invece vengono eseguito successivamente ad un controllo eseguito con l'operatore *compare* `CMP`
-
-# L'istruzione "compare" `CMP`
-
-L'istruzione "compare" esegue il confronto tra due valori numerici, la struttura di base del comando `CMP` è:
+Con le attuali conoscenze siamo perfettamente in grado di implementare un ciclo all'interno del nostro programma assembly, infatti ci basterebbe dichiarare una variabile contatore ed una label che identifica il punto di inizio del loop, poi con un semplice salto condizionato, come per esempio `JNZ`, possiamo iterare il blocco di codice, di seguito uno snippet che mostra come potrebbe essere implementato un loop con un salto condizionato `JNZ`
 
 ```nasm
-CMP destination, source
+mov r8, 10      ; counter
+
+loop: ; istruzioni del loop 
+    dec r8      ; decrementa il valore di r8 di un'unità
+    jnz loop    ; se r8 != 0, allora, salta di nuovo alla label "loop"
 ```
 
-* `destination` &rarr; può essere un valore in memoria o i un registro
-* `source` &rarr; può essere un valore immediato *(costante)*, in memoria o in un registro
+# Iterazione con opcode `loop`
 
-# Salti incondizionati `JMP`
-
-Il concetto di salto incondizionato è molto semplice da comprendere, come vedremo anche negli esempi, utilizziamo l'istruzione `JMP` per saltare da una parte all'altra del codice in maniera imprescindibile e quindi senza necessariamente adempiere ad una specifica condizione.
+I salti condizionati basterebbero per l'implementazione di un ciclo, comunque sia, nel set di istruzioni assembly ci viene messa a disposizione un istruzione specifica allo scopo chiamata `loop`, questo opcode ammette come unico operando la label in cui saltare che definisce il punto di inizio del loop, inoltre, viene utilizzato il registro `ECX` come variabile contatore, la sintassi dell'istruzione `loop` è definita come:
 
 ```nasm
-; some instruction
-jmp label2
-label1:
-; the code block into label1 will be skipped
-label2:
-; instruction into label2
+mov ecx, 10          ; sposta il valore 10 nel registro contatore ecx
+
+label1:              
+    ; <istruzioni del loop>
+    loop label1      ; decrementa il registro ECX e salta alla label "label1"
 ```
-
-# Salti condizionati
-
-A differenza dell'opcode `JMP` visto precedentemente, quelli che tratteremo ora sono tutti salti che vengono effettuati solamente se nel programma avvengono specifiche condizioni, volendo fare riferimenti al linguaggio `C`, i salti condizionati sono l'equivalente del costrutto `IF-THEN-ELSE` o dello `SWITCH CASE`, ma a basso livello.
-
-Quando eseguiamo un operazione od un confronto nel nostro programma assembly, l'esito di quella operazione va ad alterare uno o più specifici campi del registro `EFLAGS`, per esempio, se il risultato di una qualsiasi operazione aritmetica è un numero pari, allora, il campo `PF` del registro `EFLAGS` è settato a `1`, altrimenti è settato a `0`. Dunque, i flags sono fondamentali per determinare i salti condizionati in un programma assembly.
-
-Di seguito un elenco di tutti gli opcode che abbiamo a disposizione per l'implementazione di un salto condizionato:
-
-| OPCODE | Descrizione | Flag coinvolti | Tipi di numeri su cui lavora |
-|:-:|:-:|:-:|:-:|
-| `JE`/`JZ` | Salta se uguale / Salta se uguale a `0` | `ZF` | signed/unsigned |
-| `JNE`/`JNZ` | Salta se diverso / Salta se diverso da `0`  | `ZF` | signed/unsigned |
-| `JG`/`JNLE` | Salta se maggiore / Salta se non è minore o uguale  | `ZF`, `OF`, `SF` | signed |
-| `JGE`/`JNL` | Salta se maggiore o uguale / Salta se non è minore | `OF`, `SF` | signed |
-| `JL`/`JNGE` | Salta se minore / Salta se non maggiore o uguale | `OF`, `SF` | signed |
-| `JLE`/`JNG` | Salta se minore o uguale / Salta se non maggiore | `OF`, `SF`, `ZF` | signed |
-| `JA`/`JNBE` | Salta se maggiore / Non saltare se minore o uguale | `CF`, `ZF` | unsigned |
-| `JAE`/`JNB` | Salta se maggiore o uguale / Salta se non è minore | `CF` | unsigned |
-| `JB`/`JNAE` | Salta se minore / Salta se non è maggiore o uguale | `CF` | unsigned |
-| `JBE`/`JNA` | Salta se minore o uguale / Salta se non è maggiore | `CF`, `AF` | unsigned |
-
-Oltre ai salti dovuti a condizioni di confronto tra numeri con segno e senza segno, vi è anche un'altra classe di salti che avvengono in determinati condizioni speciali, di seguito un elenco di questa tipologia di salti:
-
-| OPCODE | Descrizione | Flag coinvolti |
-|:-:|:-:|:-:|
-| `JXCZ` | Salta se il flag `CX` è `0` |  |
-| `JC` | Salta se l'ultima operazione aritmetica ha generato un riporto | `CF` |
-| `JNC` | Salta se l'ultima operazione aritmetica non ha generato un riporto | `CF` |
-| `JO` | Salta se l'ultima operazione ha generato un overflow di memoria | `OF` |
-| `JNO` | Salta se l'ultima operazione non ha generato un overflow di memoria | `OF` |
-| `JP`/`JPE` | Salta se il risultato dell'operazione è un numero pari / Salta se il risultato dell'operazione è un numero dispari | `PF` |
-| `JNP`/`JPO` | Salta se il risultato dell'operazione non è un numero pari / Salta se il risultato dell'operazione non è un numero dispari | `PF` |
-| `JS` | Salta se il risultato dell'operazione è un numero negativo | `SF` |
-| `JNS` | Salta se il risultato dell'operazione è un numero positivo | `SF` |
 
 # Compilare ed eseguire un sorgente `*.asm`
 
