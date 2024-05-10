@@ -1,6 +1,7 @@
 # Assembly Course: Macro
 
 - [Cos'è una macro](#cosè-una-macro)
+- [Sintassi per l'implementazione di una macro](#sintassi-per-limplementazione-di-una-macro)
 - [Compilare ed eseguire un sorgente `*.asm`](#compilare-ed-eseguire-un-sorgente-asm)
 - [References](#references)
 - [Author](#author)
