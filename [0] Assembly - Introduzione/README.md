@@ -1,6 +1,7 @@
 # Assembly Course: Introduzione
 
 - [Assembly Course: Introduzione](#assembly-course-introduzione)
+- [Architetture CISC e RISC](#architetture-cisc-e-risc)
 - [Cos'è l'assembly?](#cosè-lassembly)
 - [L'assemblatore `NASM`](#lassemblatore-nasm)
   - [Installare NASM sui sistemi Linux](#installare-nasm-sui-sistemi-linux)
@@ -12,6 +13,26 @@
 - [Compilare ed eseguire un sorgente `*.asm`](#compilare-ed-eseguire-un-sorgente-asm)
 - [References](#references)
 - [Author](#author)
+
+# Architetture CISC e RISC
+
+Uno degli aspetti principali per la classificazione di un microprocessore è la sua **architettura**, negli anni sono state svariate le architetture progettate. 
+
+Le CPU offrono un set di istruzioni con la quale programmare a basso livello la CPU questo set di istruzioni è tecnicamente detto **ISA** *(Instruction Set Architecture)*, lo ISA di una CPU varia in base all'architettura che implementa.
+
+Le architetture si suddividono principalmente in due macro famiglie:
+
+* **CISC** *(Complex Instruction Set Computer)* &rarr; Lo ISA delle architetture CISC era molto ampio, e di conseguenza complesso, tuttavia l'ampiezza delle istruzioni a disposizione garantisce un copertura su savriate operazioni possibili ad ogni singolo clock, alcuni esempi di architetture CISC:
+  * `x86`  
+  * `Motorola 68000`  
+  * `Intel 8086`
+* **RISC** *(Restricted Instruction Set Computer)* &rarr; La comunità informatica negli anni ha compreso che l'efficienza, e quindi le prestazioni, di un sistema migliorano all'aumentare della semplicità, dunque, poche istruzioni garantiscono semplicità d'uso ed efficienza maggiore, alcuni esempi di architetture RISC.
+  * `MIPS` 
+  * `ARM` 
+  * `PowerPC`
+  * `RISC-V`
+
+I moderni processori come `intel` e `amd` si basano su un architettura `x86`, dunque il set di istruzioni è di tipo RISC.
 
 # Cos'è l'assembly?
 
