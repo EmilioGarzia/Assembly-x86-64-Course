@@ -21,14 +21,14 @@ loop: ; istruzioni del loop
 
 # Iterazione con opcode `loop`
 
-I salti condizionati basterebbero per l'implementazione di un ciclo, comunque sia, nel set di istruzioni assembly ci viene messa a disposizione un istruzione specifica allo scopo chiamata `loop`, questo opcode ammette come unico operando la label in cui saltare che definisce il punto di inizio del loop, inoltre, viene utilizzato il registro `ECX` come variabile contatore, la sintassi dell'istruzione `loop` è definita come:
+I salti condizionati basterebbero per l'implementazione di un ciclo, comunque sia, nel set di istruzioni assembly ci viene messa a disposizione un istruzione specifica allo scopo chiamata `loop`, questo opcode ammette come unico operando la label in cui saltare che definisce il punto di inizio del loop, inoltre, viene utilizzato il registro `RCX` come variabile contatore, la sintassi dell'istruzione `loop` è definita come:
 
 ```nasm
-mov ecx, 10          ; sposta il valore 10 nel registro contatore ecx
+mov rcx, 10          ; sposta il valore 10 nel registro contatore rcx
 
 label1:              
     ; <istruzioni del loop>
-    loop label1      ; decrementa il registro ECX e salta alla label "label1"
+    loop label1      ; decrementa il registro RCX e salta alla label "label1"
 ```
 
 # Compilare ed eseguire un sorgente `*.asm`
