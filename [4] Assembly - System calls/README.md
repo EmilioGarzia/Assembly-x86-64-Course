@@ -52,6 +52,8 @@ Per l'utilizzo delle system call in assembly NASM dobbiamo fare molta attenzione
 
 **IMPORTANTE**: Una volta settati tutti i registri per una specifica system call possiamo eseguire l'istruzione `syscall` per eseguire quella system call con i parametri da noi settati.
 
+**IMPORTANTE**: Se si sta scrivendo codice sorgente assembly per architetture `32bit`, allora, non sarà possibile invocare le system call con l'istruzione `syscall`, ma si utilizza l'invocazione alla interrupt `int 0x80`.
+
 ⚠: L'elenco completo delle system call per le architetture `x86-64` è consultabile [qui](https://blog.rchapman.org/posts/Linux_System_Call_Table_for_x86_64/).
 
 # Compilare ed eseguire un sorgente `*.asm`
