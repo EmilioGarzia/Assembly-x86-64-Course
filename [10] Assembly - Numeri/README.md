@@ -1,8 +1,54 @@
 # Assembly Course: Numeri
 
+- [Codifica dei numeri in assembly](#compilare-ed-eseguire-un-sorgente-asm)
+- [Numeri in codifica `ASCII`](#numeri-in-codifica-ascii)
+    - [Operazioni aritmetiche su numeri `ASCII`](#operazioni-aritmetiche-su-numeri-ascii) 
 - [Compilare ed eseguire un sorgente `*.asm`](#compilare-ed-eseguire-un-sorgente-asm)
 - [References](#references)
 - [Author](#author)
+
+# Codifica dei numeri in assembly
+
+I numeri in assembly sono rappresentati tramite codifica **binaria**, dunque, le operazioni aritmetiche lavorano su valori binari, tuttavia, quando andiamo a prendere un valore numerico in input dalla tastiera, oppure quando vogliamo stamparlo sulla console di sistema è necessario convertire questo valore da codifica binaria a codifica **ASCII**.
+
+Quindi qualora volessimo prendere in input due numeri da tastiera per sommarli tra di loro, dovremmo implementare un codice che:
+
+1. Prenda in input i due numeri dallo standard input
+1. I numeri presi in input sono in codifica **ASCII**, quindi li convertiamo in **binario**
+1. Una volta ottenuti i valori in binario possiamo lavorarci su applicando tutte le operazioni aritmetiche desiderate
+1. A questo punto possiamo riconvertire in **ASCII** i valori binari, così da poterli mostrare sullo standard output
+
+Ci si rende subito conto che tale approccio è estremamente prolisso in termini di sintassi e soprattutto aumenta notevolmente [l'overhead](https://it.wikipedia.org/wiki/Overhead), per nostra fortuna il linguaggio assembly ci mette a disposizione una serie di `opcode` che ci consentono di eseguire queste operazioni aritmetiche in maniera molto più efficiente, dandoci la possibilità di poter lavorare direttamente su due tipologie di codifiche:
+
+* Codifica **ASCII**
+* Codifica **BCD** *(binario)*
+
+# Numeri in codifica ASCII
+
+Nella rappresentazione *ASCII* ogni cifra del notro numero è in realtà un carattere, e numeri composti da più cifre non sono altro che una stringa di caratteri.
+
+La codifica ASCII definisce un valore intero a `8bit` per ogni carattere contenuto nello standard ASCII, lo stesso vale anche per i numeri decimali, che vengono sì mostrati a noi come un carattere, ma la macchina lo legge come il suo corrispettivo decimale ASCII, di seguito una tabella che mostra la codifica ASCII dei numeri decimali:
+
+| Decimale | ASCII code *(in esadecimale)*|
+|:-:|:-:|
+| `0` | `30` |
+| `1` | `31` |
+| `2` | `32` |
+| `3` | `33` |
+| `4` | `34` |
+| `5` | `35` |
+| `6` | `36` |
+| `7` | `37` |
+| `8` | `38` |
+| `9` | `39` |
+
+Quindi se si vuole rappresentare il numero `1234` in ASCII scriveremo una stringa del tipo:
+
+| 1 | 2 | 3 | 4 |
+|:-:|:-:|:-:|:-:|
+| `31H` | `32H` | `33H` | `34H` |
+
+## Operazioni aritmetiche su numeri ASCII
 
 
 
