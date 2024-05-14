@@ -4,7 +4,7 @@
 - [Le variabili](#le-variabili)
 - [Dichiarazione di variabili non inizializzate](#dichiarazione-di-variabili-non-inizializzate)
 - [Inizializzazione di variabili mediante differenti codifiche](#inizializzazione-di-variabili-mediante-differenti-codifiche)
-- [Inizializzazioni Multiple](#inizializzazioni-multiple)
+    - [Inizializzazioni Multiple](#inizializzazioni-multiple)
 - [Compilare ed eseguire un sorgente `*.asm`](#compilare-ed-eseguire-un-sorgente-asm)
 - [References](#references)
 - [Author](#author)
@@ -57,7 +57,30 @@ Risulta essere molto comodo dichiarare valori in differenti codifiche, anche sol
 | Esadecimale | `var DB 0x0A` | `10` |
 | Binario | `var DB 0b1010` | `10` |
 
-# Inizializzazioni Multiple
+# Gli array in assembly
+
+Anche il linguaggio assembly ci permette di inizializzare o di riservare segmenti contigui di memoria, in modo da poter creare delle vere e proprie collezioni di dati omogenei, cosi come accade nei linguaggi di programmazione convenzionali come il `C`.
+
+Di seguito un esempio di inizializzazione e di accesso ad un vettore:
+
+```nasm
+section .text
+    mov rcx, [vector_byte+3]      ; prendi elemento in posizione 3 del vettore
+    mov rcx, [vector_word+4]      ; una word è 2byte, quindi l'offset è a step di 2 
+    mov rcx, [repeated_value+2]   ; una word è 2byte, quindi l'offset è a step di 2
+
+section .data
+    vector_byte db 3,4,5,6,7     ; inizializza vettore di byte
+    vector_word dw 1,2,3,4       ; inizializza vettore di word
+    repeated_value times 5 db 2  ; vettore di 5 elementi inizilizzati a 2
+
+section .bss
+    empty_vector resb 4          ; dichiara un vettore di dimensione 4 non inizializzato
+```
+
+Dall'esempio di cui sopra si noti come si utilizzi lo scostamento *(offset)* per spostarsi tra i vari elementi del vettore, quindi, bisogna fare molta attenzione alla dimensione dei dati che si stanno memorizzando, se per esempio il nostro vettore è una collezione di `word`, allora, lo offset è a step di `2` byte per volta.
+
+## Inizializzazioni Multiple
 
 Possiamo utilizzare la keyword `times` per inizializzare una sequenza di informazioni ripetute, per esempio nel caso in cui volessimo inizializzare un vettore da $n$ elementi tutti con lo stesso valore.
 
