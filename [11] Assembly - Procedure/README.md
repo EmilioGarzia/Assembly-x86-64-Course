@@ -1,9 +1,26 @@
 # Assembly Course: Procedure
 
+- [Cosa sono le procedure?](#cosa-sono-le-procedure)
 - [Compilare ed eseguire un sorgente `*.asm`](#compilare-ed-eseguire-un-sorgente-asm)
 - [References](#references)
 - [Author](#author)
 
+# Cosa sono le procedure?
+
+Conoscere le procedure è fondamentale per snellire i nostri codici sorgenti scritti in assembly, possiamo considerare le procedure come delle sub routine, volendo utilizzare un termine più ad alto livello, possiamo vederle come delle funzioni, ma in questo caso le sub routine non ritornano alcun risultato, poichè la parola chiava `ret` ci permette semplicemente di eseguire un jump all'istruzione successiva alla chiamata della sub routine.
+
+L'implementazione di una procedura in assembly è estremamente semplice, e sono due fondamentalmente le istruzioni che ci serve conoscere sono `CALL` per eseguire una chiamata alla procedura, e `ret` per ritornare dalla procedura e continuare la normale esecuzione del programma.
+
+> Struttura di una procedura in assembly
+
+```nasm
+; istruzioni assembly
+call procedure_name
+procedure_name:
+    ; body della procedura
+    ret
+; altro codice asssembly
+```
 
 # Compilare ed eseguire un sorgente `*.asm`
 
