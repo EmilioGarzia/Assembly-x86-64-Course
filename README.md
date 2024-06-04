@@ -14,6 +14,8 @@ In questa repository sono contenuti una serie di sorgenti scritti in linguaggio 
 
 * [Concetti elementari sulla memoria principale](https://it.wikipedia.org/wiki/Memoria_(informatica))
 
+* [Debugger GDB *(altamente consigliato)*](https://en.wikipedia.org/wiki/GNU_Debugger)
+
 # Dipendenze
 
 * [Assemblatore NASM](https://www.nasm.us/)
